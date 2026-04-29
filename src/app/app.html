@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Gestion des Joueurs</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/games">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" style="cursor:pointer;"
+          (click)="toggleMenu($event)">
+            Games
+          </a>
+          <ul class="dropdown-menu" [class.show]="menuOpen">
+            <li>
+              <a class="dropdown-item" routerLink="/games"
+                 *kaHasRoles="['ADMIN']; checkRealm:true"
+                 (click)="menuOpen=false">Lister</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto m-2">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">Mon Profil</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" style="cursor:pointer;"
+          (click)="toggleConnexion($event)">
+            Connexion
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" [class.show]="connexionOpen">
+            @if (!authenticated) {
+              <li><button class="dropdown-item" (click)="login()">Login</button></li>
+            } @else {
+              <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+            }
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet />
